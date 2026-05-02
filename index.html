@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Цитаделата на Магията</title>
+    <title>Летописи на Елдория</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Cinzel:wght@400;700&display=swap');
 
@@ -17,96 +17,110 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px;
             padding: 40px 20px;
             text-align: center;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: #ffd700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5), 2px 2px 5px #000;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
         .scroll-box {
             border: 2px solid #4a3721;
             padding: 25px;
             background: rgba(20, 10, 5, 0.8);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 15px rgba(74, 55, 33, 0.6);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
             border-radius: 8px;
-            position: relative;
-            border-image: url("https://www.transparenttextures.com/patterns/dark-leather.png") 30 round;
+            margin-bottom: 20px;
         }
 
-        .scroll-box::before {
-            content: '✧ ✦ ✧';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a0b2e;
-            padding: 0 15px;
-            color: #ffd700;
-            font-size: 1.2rem;
+        .info-section {
+            display: none; /* Скрыто по умолчанию */
+            text-align: left;
+            margin-top: 30px;
+            background: rgba(40, 20, 10, 0.9);
+            padding: 20px;
+            border-left: 3px solid #ffd700;
+            animation: fadeIn 1s ease;
         }
 
-        p {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            font-style: italic;
-            margin: 0;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        h2 { color: #ffd700; font-family: 'Cinzel'; border-bottom: 1px solid #4a3721; }
 
         .btn {
             display: inline-block;
-            margin-top: 40px;
-            padding: 18px 35px;
+            padding: 15px 30px;
             color: #1a0b2e;
             background: linear-gradient(45deg, #ffd700, #b8860b);
             text-decoration: none;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 3px;
             border-radius: 4px;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            border: 1px solid #ffffff33;
+            cursor: pointer;
+            border: none;
+            font-family: 'Cinzel';
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-            filter: brightness(1.1);
-        }
-
-        .particles {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.2;
-            pointer-events: none;
-        }
+        .race-card { margin-bottom: 20px; }
+        .race-card b { color: #ffd700; }
     </style>
 </head>
 <body>
 
-    <div class="particles"></div>
-
     <div class="container">
-        <h1>Елдория</h1>
+        <h1>Елдория: Летописи</h1>
+        
         <div class="scroll-box">
-            <p>"Там, където мъглата целува древните камъни, а шепотът на звездите се превръща в реалност, започва твоята легенда. Готов ли си да прекрачиш прага?"</p>
+            <p>"Светът е голям и крие много тайни. Натисни бутона долу, за да призовеш знанието за древните раси."</p>
+            <button class="btn" onclick="showMagic()">Влез в архива</button>
         </div>
-        <a href="#" class="btn">Влез в портала</a>
+
+        <div id="magicInfo" class="info-section">
+            <h2>Древните раси</h2>
+            
+            <div class="race-card">
+                <b>🧝 Елфи:</b> Безсмъртни пазители на горите. Горди и изтънчени. 
+                <i>Отношения:</i> Гледат на хората с пренебрежение, а с дворфите имат вечен спор за красотата на природата срещу метала.
+            </div>
+
+            <div class="race-card">
+                <b>🧔 Дворфи:</b> Майстори на ковачеството и добива на злато. Живеят в дълбоки пещери.
+                <i>Отношения:</i> Уважават хората за търговията, но не понасят орките и често се карат с елфите.
+            </div>
+
+            <div class="race-card">
+                <b>👹 Орки:</b> Силни и свирепи воини. Живеят за битката.
+                <i>Отношения:</i> Намират се в състояние на постоянна война с всички останали раси, особено с хората и елфите.
+            </div>
+
+            <div class="race-card">
+                <b>⚔️ Хора:</b> Най-амбициозната раса. Строят империи и градове.
+                <i>Отношения:</i> Опитват се да балансират между дипломацията с елфите и търговията с дворфите, докато отблъскват набезите на орките.
+            </div>
+        </div>
     </div>
+
+    <script>
+        function showMagic() {
+            var info = document.getElementById("magicInfo");
+            if (info.style.display === "none" || info.style.display === "") {
+                info.style.display = "block";
+            } else {
+                info.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
+
