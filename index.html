@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цитаделата на Магията</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Cinzel:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #1a0b2e 0%, #05020a 100%);
+            color: #e0d5b8;
+            font-family: 'Almendra', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5), 2px 2px 5px #000;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .scroll-box {
+            border: 2px solid #4a3721;
+            padding: 25px;
+            background: rgba(20, 10, 5, 0.8);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 15px rgba(74, 55, 33, 0.6);
+            border-radius: 8px;
+            position: relative;
+            border-image: url("https://www.transparenttextures.com/patterns/dark-leather.png") 30 round;
+        }
+
+        .scroll-box::before {
+            content: '✧ ✦ ✧';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a0b2e;
+            padding: 0 15px;
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 18px 35px;
+            color: #1a0b2e;
+            background: linear-gradient(45deg, #ffd700, #b8860b);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            border: 1px solid #ffffff33;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.2;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="particles"></div>
+
+    <div class="container">
+        <h1>Елдория</h1>
+        <div class="scroll-box">
+            <p>"Там, където мъглата целува древните камъни, а шепотът на звездите се превръща в реалност, започва твоята легенда. Готов ли си да прекрачиш прага?"</p>
+        </div>
+        <a href="#" class="btn">Влез в портала</a>
+    </div>
+
+</body>
+</html>
