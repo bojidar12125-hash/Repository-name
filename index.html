@@ -1,199 +1,63 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Летописите на Елдория</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Cinzel:wght@400;700&display=swap');
+<script>
+    function toggleSection(id) {
+        // Находим все блоки с информацией на странице по их классу
+        const allSections = document.querySelectorAll('.info-section');
+        const target = document.getElementById(id);
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: radial-gradient(circle, #1a0b2e 0%, #05020a 100%);
-            color: #e0d5b8;
-            font-family: 'Almendra', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 800px;
-            padding: 30px 15px;
-            text-align: center;
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            color: #ffd700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            margin-bottom: 25px;
-        }
-
-        .main-scroll {
-            border: 2px solid #4a3721;
-            padding: 20px;
-            background: rgba(20, 10, 5, 0.85);
-            box-shadow: 0 0 30px rgba(0,0,0,0.7);
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-
-        /* Общие стили для кнопок */
-        .btn {
-            display: inline-block;
-            margin: 10px 5px;
-            padding: 15px 25px;
-            color: #1a0b2e;
-            background: linear-gradient(45deg, #ffd700, #b8860b);
-            border: none;
-            border-radius: 5px;
-            font-family: 'Cinzel';
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-        }
-
-        /* Стили для выпадающих блоков */
-        .info-section {
-            display: none; /* Скрыто по умолчанию */
-            text-align: left;
-            background: rgba(30, 15, 40, 0.9);
-            padding: 20px;
-            border: 1px solid #ffd700;
-            border-radius: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            animation: fadeInWobble 0.6s ease-out; /* Крутая анимация */
-        }
-
-        h2 { 
-            color: #ffd700; 
-            border-bottom: 1px solid #ffd700; 
-            padding-bottom: 5px; 
-            font-family: 'Cinzel'; 
-            text-align: center;
-        }
-        
-        .entry {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-left: 2px solid #ffd700;
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .entry b { color: #ffd700; display: block; margin-bottom: 3px; }
-
-        /* Крутая анимация появления с легким покачиванием */
-        @keyframes fadeInWobble {
-            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
-            50% { transform: translateY(-5px) scale(1.02); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .divider {
-            border: 0;
-            border-top: 1px dashed #4a3721;
-            margin: 30px 0;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>📜 Летописи на Елдория</h1>
-        
-        <div class="main-scroll">
-            <p>"Ти прекрачи прага на Великата библиотека. Избери коя тайна искаш да разкриеш днес..."</p>
-            
-            <button class="btn" onclick="toggleSection('racesInfo')">👥 Древните Раси</button>
-            <button class="btn" onclick="toggleSection('artifactsInfo')">🗝️ Магически Артефакти</button>
-        </div>
-
-        <div id="racesInfo" class="info-section">
-            <h2>Жителите на света</h2>
-            <div class="entry"><b>🧝 Елфи:</b> Безсмъртни пазители на горите. Горди и изтънчени. Отношения: Гледат на хората с пренебрежение, а с дворфите имат вечен спор за красотата на природата срещу метала.</div>
-            <div class="entry"><b>🧔 Дворфи:</b> Майстори на ковачеството и добива на злато. Живеят в дълбоки пещери. Отношения: Уважават хората за търговията, но не понасят орките и често се карат с елфите.</div>
-            <div class="entry"><b>⚔️ Хора:</b> Най-амбициозната раса. Строят империи и градове. Отношения: Опитват се да балансират между дипломацията с елфите и търговията с дворфите, докато отблъскват набезите на орките.</div>
-            <div class="entry"><b>👹 Орки:</b> Силни и свирепи воини. Живеят за битката. Отношения: Намират се в състояние на постоянна война с всички останали раси, особено с хората и елфите.</div>
-        </div>
-
-        <div id="artifactsInfo" class="info-section">
-            <h2>Древни Артефакти</h2>
-            
-            <div class="entry">
-                <b>🖋️ Магическа писалка (Atelier)</b>
-                Инструментът, с който магьосниците рисуват съдбата. Без това специално перо нито един магически кръг няма да оживее.
-            </div>
-
-            <div class="entry">
-                <b>📜 Свитък на "Золтрак" (Frieren)</b>
-                Копие на древно, разрушително заклинание. Преди е било символ на ужас, сега е задължително знание за всеки маг.
-            </div>
-
-            <div class="entry">
-                <b>🗡️ Кенсуке, Живият меч (Dungeon Meshi)</b>
-                Меч, който е част от екосистемата на подземието. Той усеща опасностите, но изисква грижи като домашен любимец.
-            </div>
-        </div>
-
-        <div class="divider"></div>
-        <p style="font-size: 0.8rem; opacity: 0.5; font-style: italic;">Архивите се обновяват...</p>
-
+        allSections.forEach(section => {
+            if (section === target) {
+                // Если это тот, на который нажали — переключаем
+                section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+            } else {
+                // Все остальные закрываем без исключения
+                section.style.display = 'none';
+            }
+        });
+    }
+</script>
+<div class="main-scroll" style="margin-top: 20px;">
+    <p>📜 Изберете глава от архивите:</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+        <button class="btn" onclick="toggleSection('racesSection')">👥 Великите Раси</button>
+        <button class="btn" onclick="toggleSection('atelierMagic')">🎨 Ателие: Начертание</button>
+        <button class="btn" onclick="toggleSection('frierenMagic')">🔮 Фрирен: Анализ</button>
+        <button class="btn" onclick="toggleSection('dungeonMagic')">🍲 Meshi: Екология</button>
     </div>
-        <div class="main-scroll" style="margin-top: 20px;">
-            <p>Допълнителни архиви:</p>
-            <button class="btn" onclick="toggleNew('magicNew')">✨ Магически Системи</button>
-            <button class="btn" onclick="toggleNew('beastsNew')">🐉 Бестиарий</button>
-        </div>
+</div>
 
-        <div id="magicNew" class="info-section" style="display:none;">
-            <h2>Магията на Света</h2>
-            <div class="entry"><b>🌀 Начертание:</b> Магията е рисунка с мастило (Atelier).</div>
-            <div class="entry"><b>🔮 Анализ:</b> Магията е дешифриране на код (Frieren).</div>
-            <div class="entry"><b>🍲 Екология:</b> Магията е енергия от храна (Dungeon Meshi).</div>
-        </div>
+<div id="racesSection" class="info-section">
+    <h2>Древните Раси</h2>
+    <div class="entry"><b>🧝 Елфи:</b> Дълголетници, чието въображение оформя реалността. Гледат на магията като на песен.</div>
+    <div class="entry"><b>🧔 Дворфи:</b> Техно-магове на древността. Вграждат магически вериги в стомана и скъпоценни камъни.</div>
+    <div class="entry"><b>⚔️ Хора:</b> Расата на прогреса. Те са превърнали магията в масово достъпно знание.</div>
+</div>
 
-        <div id="beastsNew" class="info-section" style="display:none;">
-            <h2>Опасни Същества</h2>
-            <div class="entry"><b>🐉 Дракон:</b> Върховен хищник.</div>
-            <div class="entry"><b>📦 Мимик:</b> Търсач на непредпазливи авантюристи.</div>
-            <div class="entry"><b>🍄 Гъби:</b> Подвижни обитатели на подземията.</div>
-        </div>
-    
-    <script>
-        function toggleSection(sectionId) {
-            // Список всех секций
-            var sections = ['racesInfo', 'artifactsInfo'];
-            
-            sections.forEach(function(id) {
-                var section = document.getElementById(id);
-                if (id === sectionId) {
-                    // Если это нажатая секция — переключаем (показать/скрыть)
-                    if (section.style.display === "block") {
-                        section.style.display = "none";
-                    } else {
-                        section.style.display = "block";
-                    }
-                } else {
-                    // Все остальные секции обязательно скрываем
-                    section.style.display = "none";
-                }
-            });
-        }
-    </script>
+<div id="atelierMagic" class="info-section">
+    <h2>Магията на Начертанието</h2>
+    <div class="entry">
+        <b>🖋️ Мастило и Перо:</b> Магията не е в човека, а в линиите. Всеки кръг е сложна инструкция за енергията на света.
+    </div>
+    <div class="entry">
+        <b>⚠️ Прецизност:</b> Ако една точка е на грешно място, заклинанието може да се превърне в бедствие. Това е изкуство на търпението.
+    </div>
+</div>
 
-</body>
-</html>
+<div id="frierenMagic" class="info-section">
+    <h2>Аналитичната Магия на Фрирен</h2>
+    <div class="entry">
+        <b>🔍 Дешифриране:</b> Всяко заклинание има логическа структура. Ако разбереш формулата, можеш да я отразиш или унищожиш.
+    </div>
+    <div class="entry">
+        <b>⚡ Обикновена магия:</b> Дори най-простото заклинание ("Золтрак"), усъвършенствано през вековете, е по-ефективно от древни проклятия.
+    </div>
+</div>
 
+<div id="dungeonMagic" class="info-section">
+    <h2>Магическата Екосистема</h2>
+    <div class="entry">
+        <b>🍃 Енергиен обмен:</b> Магията консумира калории. Магьосникът трябва да се храни добре, за да поддържа маната си.
+    </div>
+    <div class="entry">
+        <b>🦖 Части от чудовища:</b> Рога, крила и органи на магически същества служат като естествени проводници и батерии.
+    </div>
+</div>
