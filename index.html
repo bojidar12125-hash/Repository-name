@@ -1,63 +1,366 @@
-<script>
-    function toggleSection(id) {
-        // Находим все блоки с информацией на странице по их классу
-        const allSections = document.querySelectorAll('.info-section');
-        const target = document.getElementById(id);
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Арканум Гримоар | Магически фолианти</title>
+    <!-- Google Fonts: Cinzel (заглавия, елегантен) и Almendra (за текст, мистичен) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Almendra:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            background: radial-gradient(circle at 10% 20%, #1a120b, #0c0704);
+            color: #f7ebd9;
+            font-family: 'Almendra', serif;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .grimoire-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+            padding-bottom: 1.5rem;
+        }
+
+        .grimoire-header h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #e4c580, #b97f2e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .grimoire-header p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        .button-panel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* градиентни бутони (злато → бронз) */
+        .arcane-btn {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 0.75rem 1.8rem;
+            border: none;
+            background: linear-gradient(145deg, #dbb45c, #a5661a);
+            color: #2c1a0c;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.25s ease-in-out;
+            box-shadow: 0 8px 14px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,200,0.6);
+            letter-spacing: 1px;
+        }
+
+        .arcane-btn:hover {
+            background: linear-gradient(145deg, #ecc86e, #b87524);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 22px rgba(0,0,0,0.4);
+            color: #1e1208;
+        }
+
+        .arcane-btn:active {
+            transform: translateY(2px);
+        }
+
+        /* стилове на блоковете info-section — анимация на появяване */
+        .info-section {
+            background: rgba(25, 18, 12, 0.75);
+            backdrop-filter: blur(5px);
+            border-radius: 32px;
+            border-left: 8px solid #dbb45c;
+            border-right: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 2rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px black;
+            transition: all 0.2s;
+            animation: fadeSlideUp 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        }
+
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            margin-bottom: 1rem;
+            color: #f3d382;
+            border-left: 4px solid #e0a23b;
+            padding-left: 1rem;
+        }
+
+        .info-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.6rem 0;
+            color: #e7bc72;
+        }
+
+        .info-section p {
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .info-section ul {
+            margin-left: 1.8rem;
+            list-style-type: circle;
+            margin-bottom: 1rem;
+        }
+
+        .info-section li {
+            margin: 0.4rem 0;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border-color: #dbb45c30;
+        }
+
+        .badge-magic {
+            display: inline-block;
+            background: #2a1c0e;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            font-family: 'Cinzel', monospace;
+            color: #e2b768;
+            margin-right: 8px;
+        }
+
+        .info-section.hidden {
+            display: none;
+        }
+
+        .info-section:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 1.2rem;
+            }
+            .arcane-btn {
+                font-size: 1rem;
+                padding: 0.55rem 1.2rem;
+            }
+            .info-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            font-family: 'Almendra', monospace;
+            border-top: 1px dashed #c9a03d;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="grimoire-header">
+        <h1>✦ Гримоар на Тайните ✦</h1>
+        <p>Книга на познанието: раси, магия от три школи, бестиарий на легенди</p>
+    </div>
+
+    <div class="button-panel">
+        <button class="arcane-btn" data-toggle="races">⚔️ Раси</button>
+        <button class="arcane-btn" data-toggle="magic_witch">🖌️ Магия (Witch Hat)</button>
+        <button class="arcane-btn" data-toggle="magic_frieren">🔍 Магия (Frieren)</button>
+        <button class="arcane-btn" data-toggle="magic_dungeon">🍄 Магия (Dungeon Meshi)</button>
+        <button class="arcane-btn" data-toggle="monsters">🐉 Монстри</button>
+    </div>
+
+    <!-- РАСИ -->
+    <div id="races" class="info-section">
+        <h2>🌿 Древните раси</h2>
+        <p><span class="badge-magic">Елфи</span> — Деца на звездите: безсмъртни души, които пеят с вятъра. Тяхната магия е свързана с горите и сиянието на луната. Елфите притежават древна мъдрост, но често копнеят за отминали епохи.</p>
+        <p><span class="badge-magic">Дворфи</span> — Скали и наковалня. Дворфите изковали първите руни, тяхната сила е в материалния свят, а магията е изкуство на дълбинните заклинания и металургичните чарове.</p>
+        <p><span class="badge-magic">Хора</span> — Променливи като нощния вятър. Хора могат да променят облика си, тяхната същност е между сънищата и реалността. Смятани са за пазители на тайни кръстопътища.</p>
+        <p><span class="badge-magic">Орки</span> — Деца на първичната сила. Орките не са просто воини — те са шамани на предците, които призовават духовете на земята и кръвта. Техните тотеми пазят груба, но ефективна магия.</p>
+    </div>
+
+    <!-- Магия (Atelier of Witch Hat) - мастило и печати -->
+    <div id="magic_witch" class="info-section hidden">
+        <h2>✍️ Магия на мастилото и печатите</h2>
+        <h3>«Atelier of Witch Hat» — Училище на магическите рисунки</h3>
+        <p>Всяко заклинание изисква уникална магическа формула, която вещиците изписват със специално мастило върху всякаква повърхност. Печатите фиксират ефекта, превръщайки рисунката в жива магия. Сложните шарки могат да отварят портали, да променят материята или дори да спрат времето.</p>
+        <p><strong>Основни принципи:</strong> прецизност на линиите, намерение и концентрация. Мастилото трябва да бъде събрано от редки растения или метеоритен прах. Печатът е ключът, който активира скритата сила.</p>
+        <ul>
+            <li>🖋️ Мастилена четка — проводник на волята на мага.</li>
+            <li>📜 Свитък-печат — задържа магията до момента на активация.</li>
+            <li>🌀 Символи на ограничение — предотвратяват изтичането на енергия.</li>
+        </ul>
+    </div>
+
+    <!-- Магия (Frieren): аналитична магия и дешифриране -->
+    <div id="magic_frieren" class="info-section hidden">
+        <h2>🔮 Аналитична магия и дешифриране</h2>
+        <h3>«Frieren: Beyond Journey's End» — магия на разбирането</h3>
+        <p>Магията на Фрирен се основава на анализ на структурата на заклинанията и търсене на „слаби места“. Това е интелигентно магьосничество, при което вместо мощна сила се използва познание за потоците на мана. Дешифрирането на древни магически езици позволява свободно манипулиране на вражеска магия или създаване на контрамагии.</p>
+        <p>Ключови аспекти: търпение, логика и способност да се виждат магическите контури, скрити от обикновеното око. Фрирен често използва заклинания, които не разрушават, а пренасочват енергията.</p>
+        <ul>
+            <li>📖 Разшифроване на гримоари — висш пилотаж.</li>
+            <li>⚖️ Магия на баланса — превръщане на атаките в защитни чарове.</li>
+            <li>⏳ Спиране на времето в малки куполи — за анализ на сложни конструкции.</li>
+        </ul>
+    </div>
+
+    <!-- Магия (Dungeon Meshi): магия чрез екология и храна -->
+    <div id="magic_dungeon" class="info-section hidden">
+        <h2>🍲 Екологична магия и гастро-чарове</h2>
+        <h3>«Dungeon Meshi» — изкуството да превръщаш чудовища в храна</h3>
+        <p>В подземията магията се черпи от самата екосистема: растения, гъби, слузести създания — всичко това са източници на жива енергия. Маговете в Dungeon Meshi използват алхимия и готварски чарове, за да превърнат отровните чудовища в питателна храна, възстановяваща силите на съюзниците.</p>
+        <p><strong>Магически техники:</strong> заклинания за разпознаване на годни за ядене части, чарове за неутрализиране на токсини, както и специални ритуали, които усилват вкуса и лечебните свойства на ястията. Пълна хармония с природата на лабиринта. Никое същество или растение не отива напразно.</p>
+        <ul>
+            <li>🍄 Гъбна идентификация — различаване на жив гъб от мимик.</li>
+            <li>🥘 Котел на трансмутацията — превръща плътта на чудовище в питателен бульон.</li>
+            <li>🌿 Симбиоза с флората на подземието — временно опитомяване на хищни растения.</li>
+        </ul>
+    </div>
+
+    <!-- Монстри (Дракони, Мимици, Живи гъби) -->
+    <div id="monsters" class="info-section hidden">
+        <h2>🐉 Бестиарий на опасните същества</h2>
+        <p><span class="badge-magic">Дракони</span> — Легендарни същества с люспи, които отразяват магията. Драконите могат да изгарят градове, но древните представители на този род също притежават интелект и хипнотичен поглед. Кръвта им е катализатор за свръхмощни отвари.</p>
+        <p><span class="badge-magic">Мимици</span> — Скришни същества, които се маскират като сандъци, врати или дори библиотечни шкафове. Когато жертвата се приближи, мимикът изстрелва дълъг език и притегля плячката в бездната на своето „храносмилателно измерение“. Любимият им начин за защита е да имитират магически артефакт.</p>
+        <p><span class="badge-magic">Живи гъби</span> — Спорови организми, които създават илюзии и отделят халюциногенни токсини. Те могат да се движат на групи, имитирайки пънове или стени. Някои видове живи гъби симбиозират с некроманти, хранейки се с остатъчна магия.</p>
+        <hr>
+        <p>⚠️ Съвети за ловците: Срещу дракони — магнезиеви капани и ледени чарове; Мимиците могат да бъдат разкрити чрез заклинанието „Истинска идентификация на предмета“; Живите гъби не понасят ярка слънчева светлина и солни кръгове.</p>
+    </div>
+
+    <div class="footer-note">
+        📜 Гримоарът се отваря по желание — докосни бутона и опознай скритото. „Златото на знанието не ръждясва“.
+    </div>
+</div>
+
+<script>
+    /**
+     * Универсална функция toggleSection(id):
+     * Приема ID на елемент с клас .info-section
+     * Отваря блока с този ID (премахва hidden) и затваря ВСИЧКИ останали .info-section блокове.
+     */
+    function toggleSection(id) {
+        // Намираме всички елементи с клас .info-section
+        const allSections = document.querySelectorAll('.info-section');
+        // Намираме целевия елемент по id
+        const targetSection = document.getElementById(id);
+        
+        // Ако целевият елемент не съществува – прекратяваме
+        if (!targetSection) {
+            console.warn(`Елемент с id "${id}" не е намерен сред .info-section`);
+            return;
+        }
+        
+        // Обхождаме всички блокове и затваряме всички ОСВЕН целевия
         allSections.forEach(section => {
-            if (section === target) {
-                // Если это тот, на который нажали — переключаем
-                section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+            if (section !== targetSection) {
+                if (!section.classList.contains('hidden')) {
+                    section.classList.add('hidden');
+                }
+            }
+        });
+        
+        // Отваряме целевия блок (премахваме hidden, ако е скрит)
+        if (targetSection.classList.contains('hidden')) {
+            targetSection.classList.remove('hidden');
+        }
+        
+        // Плавно скролиране до блока, ако е извън видимата зона
+        try {
+            const rect = targetSection.getBoundingClientRect();
+            if (rect.top < 0 || rect.top > window.innerHeight) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        } catch(e) {}
+    }
+    
+    // Глобален обработчик на кликове (делегиране) за всички бутони с клас .arcane-btn
+    function handleArcaneClick(event) {
+        const btn = event.target.closest('.arcane-btn');
+        if (!btn) return;
+        const toggleId = btn.getAttribute('data-toggle');
+        if (!toggleId) return;
+        event.preventDefault();
+        toggleSection(toggleId);
+    }
+    
+    // Експортираме функцията в глобалния обхват за възможно използване от конзола или други скриптове
+    window.toggleSection = toggleSection;
+    
+    // Премахваме стар обработчик, ако има, за да избегнем дублиране
+    document.removeEventListener('click', handleArcaneClick);
+    document.addEventListener('click', handleArcaneClick);
+    
+    // Функция за инициализация и гарантиране на началното състояние
+    function initializeSections() {
+        const allSections = document.querySelectorAll('.info-section');
+        // По подразбиране трябва да е видим само раздел "races", всички останали скрити
+        allSections.forEach(section => {
+            if (section.id === 'races') {
+                if (section.classList.contains('hidden')) {
+                    section.classList.remove('hidden');
+                }
             } else {
-                // Все остальные закрываем без исключения
-                section.style.display = 'none';
+                if (!section.classList.contains('hidden')) {
+                    section.classList.add('hidden');
+                }
             }
         });
     }
+    
+    // Ако DOM е все още зареждащ се – изчакваме, иначе изпълняваме веднага
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeSections);
+    } else {
+        initializeSections();
+    }
+    
+    // Допълнителна функционалност: ако в URL има хеш (напр. #magic_frieren) – отваряме съответния блок
+    if (window.location.hash) {
+        const hashId = window.location.hash.substring(1);
+        if (hashId && document.getElementById(hashId) && document.getElementById(hashId).classList.contains('info-section')) {
+            setTimeout(() => {
+                toggleSection(hashId);
+            }, 80);
+        }
+    }
 </script>
-<div class="main-scroll" style="margin-top: 20px;">
-    <p>📜 Изберете глава от архивите:</p>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-        <button class="btn" onclick="toggleSection('racesSection')">👥 Великите Раси</button>
-        <button class="btn" onclick="toggleSection('atelierMagic')">🎨 Ателие: Начертание</button>
-        <button class="btn" onclick="toggleSection('frierenMagic')">🔮 Фрирен: Анализ</button>
-        <button class="btn" onclick="toggleSection('dungeonMagic')">🍲 Meshi: Екология</button>
-    </div>
-</div>
-
-<div id="racesSection" class="info-section">
-    <h2>Древните Раси</h2>
-    <div class="entry"><b>🧝 Елфи:</b> Дълголетници, чието въображение оформя реалността. Гледат на магията като на песен.</div>
-    <div class="entry"><b>🧔 Дворфи:</b> Техно-магове на древността. Вграждат магически вериги в стомана и скъпоценни камъни.</div>
-    <div class="entry"><b>⚔️ Хора:</b> Расата на прогреса. Те са превърнали магията в масово достъпно знание.</div>
-</div>
-
-<div id="atelierMagic" class="info-section">
-    <h2>Магията на Начертанието</h2>
-    <div class="entry">
-        <b>🖋️ Мастило и Перо:</b> Магията не е в човека, а в линиите. Всеки кръг е сложна инструкция за енергията на света.
-    </div>
-    <div class="entry">
-        <b>⚠️ Прецизност:</b> Ако една точка е на грешно място, заклинанието може да се превърне в бедствие. Това е изкуство на търпението.
-    </div>
-</div>
-
-<div id="frierenMagic" class="info-section">
-    <h2>Аналитичната Магия на Фрирен</h2>
-    <div class="entry">
-        <b>🔍 Дешифриране:</b> Всяко заклинание има логическа структура. Ако разбереш формулата, можеш да я отразиш или унищожиш.
-    </div>
-    <div class="entry">
-        <b>⚡ Обикновена магия:</b> Дори най-простото заклинание ("Золтрак"), усъвършенствано през вековете, е по-ефективно от древни проклятия.
-    </div>
-</div>
-
-<div id="dungeonMagic" class="info-section">
-    <h2>Магическата Екосистема</h2>
-    <div class="entry">
-        <b>🍃 Енергиен обмен:</b> Магията консумира калории. Магьосникът трябва да се храни добре, за да поддържа маната си.
-    </div>
-    <div class="entry">
-        <b>🦖 Части от чудовища:</b> Рога, крила и органи на магически същества служат като естествени проводници и батерии.
-    </div>
-</div>
+</body>
+</html>
