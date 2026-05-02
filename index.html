@@ -123,10 +123,10 @@
 
         <div id="racesInfo" class="info-section">
             <h2>Жителите на света</h2>
-            <div class="entry"><b>🧝 Елфи:</b> Пазители на горите, владеят магията чрез интуиция.</div>
-            <div class="entry"><b>🧔 Дворфи:</b> Крале на подземията, коват руни в стомана.</div>
-            <div class="entry"><b>⚔️ Хора:</b> Амбициозни строители на империи.</div>
-            <div class="entry"><b>👹 Орки:</b> Свободни племена, които признават само силата.</div>
+            <div class="entry"><b>🧝 Елфи:</b> Безсмъртни пазители на горите. Горди и изтънчени. Отношения: Гледат на хората с пренебрежение, а с дворфите имат вечен спор за красотата на природата срещу метала.</div>
+            <div class="entry"><b>🧔 Дворфи:</b> Майстори на ковачеството и добива на злато. Живеят в дълбоки пещери. Отношения: Уважават хората за търговията, но не понасят орките и често се карат с елфите.</div>
+            <div class="entry"><b>⚔️ Хора:</b> Най-амбициозната раса. Строят империи и градове. Отношения: Опитват се да балансират между дипломацията с елфите и търговията с дворфите, докато отблъскват набезите на орките.</div>
+            <div class="entry"><b>👹 Орки:</b> Силни и свирепи воини. Живеят за битката. Отношения: Намират се в състояние на постоянна война с всички останали раси, особено с хората и елфите.</div>
         </div>
 
         <div id="artifactsInfo" class="info-section">
@@ -152,7 +152,26 @@
         <p style="font-size: 0.8rem; opacity: 0.5; font-style: italic;">Архивите се обновяват...</p>
 
     </div>
+        <div class="main-scroll" style="margin-top: 20px;">
+            <p>Допълнителни архиви:</p>
+            <button class="btn" onclick="toggleNew('magicNew')">✨ Магически Системи</button>
+            <button class="btn" onclick="toggleNew('beastsNew')">🐉 Бестиарий</button>
+        </div>
 
+        <div id="magicNew" class="info-section" style="display:none;">
+            <h2>Магията на Света</h2>
+            <div class="entry"><b>🌀 Начертание:</b> Магията е рисунка с мастило (Atelier).</div>
+            <div class="entry"><b>🔮 Анализ:</b> Магията е дешифриране на код (Frieren).</div>
+            <div class="entry"><b>🍲 Екология:</b> Магията е енергия от храна (Dungeon Meshi).</div>
+        </div>
+
+        <div id="beastsNew" class="info-section" style="display:none;">
+            <h2>Опасни Същества</h2>
+            <div class="entry"><b>🐉 Дракон:</b> Върховен хищник.</div>
+            <div class="entry"><b>📦 Мимик:</b> Търсач на непредпазливи авантюристи.</div>
+            <div class="entry"><b>🍄 Гъби:</b> Подвижни обитатели на подземията.</div>
+        </div>
+    
     <script>
         function toggleSection(sectionId) {
             // Список всех секций
