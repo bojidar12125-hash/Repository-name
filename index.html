@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Арканум Гримоар | Магически фолианти</title>
-    <!-- Google Fonts: Cinzel (заглавия, елегантен) и Almendra (за текст, мистичен) -->
+    <!-- Google Fonts: Cinzel и Almendra -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Almendra:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -25,6 +25,48 @@
         .container {
             max-width: 1300px;
             margin: 0 auto;
+        }
+
+        /* Музикален контролен панел */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            padding: 12px 18px;
+            border-radius: 60px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            z-index: 1000;
+            border: 1px solid #dbb45c;
+            font-family: 'Cinzel', monospace;
+            font-size: 0.85rem;
+        }
+        .music-control button {
+            background: linear-gradient(145deg, #dbb45c, #a5661a);
+            border: none;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            cursor: pointer;
+            color: #2c1a0c;
+            transition: 0.2s;
+        }
+        .music-control button:hover {
+            background: linear-gradient(145deg, #ecc86e, #b87524);
+            transform: scale(1.02);
+        }
+        .music-control input {
+            cursor: pointer;
+            width: 100px;
+            background: #dbb45c;
+            border-radius: 10px;
+        }
+        .volume-icon {
+            font-size: 1.2rem;
         }
 
         .grimoire-header {
@@ -60,7 +102,6 @@
             margin-bottom: 3rem;
         }
 
-        /* градиентни бутони (злато → бронз) */
         .arcane-btn {
             font-family: 'Cinzel', serif;
             font-weight: 600;
@@ -87,7 +128,6 @@
             transform: translateY(2px);
         }
 
-        /* стилове на блоковете info-section — анимация на появяване */
         .info-section {
             background: rgba(25, 18, 12, 0.75);
             backdrop-filter: blur(5px);
@@ -97,7 +137,6 @@
             padding: 2rem 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 20px 35px -12px black;
-            transition: all 0.2s;
             animation: fadeSlideUp 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
         }
 
@@ -140,15 +179,6 @@
             margin-bottom: 1rem;
         }
 
-        .info-section li {
-            margin: 0.4rem 0;
-        }
-
-        hr {
-            margin: 1rem 0;
-            border-color: #dbb45c30;
-        }
-
         .badge-magic {
             display: inline-block;
             background: #2a1c0e;
@@ -164,10 +194,6 @@
             display: none;
         }
 
-        .info-section:last-child {
-            margin-bottom: 0;
-        }
-
         @media (max-width: 680px) {
             body {
                 padding: 1.2rem;
@@ -176,8 +202,14 @@
                 font-size: 1rem;
                 padding: 0.55rem 1.2rem;
             }
-            .info-section h2 {
-                font-size: 1.5rem;
+            .music-control {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                gap: 8px;
+            }
+            .music-control input {
+                width: 70px;
             }
         }
 
@@ -193,6 +225,7 @@
     </style>
 </head>
 <body>
+
 <div class="container">
     <div class="grimoire-header">
         <h1>✦ Гримоар на Тайните ✦</h1>
@@ -216,12 +249,11 @@
         <p><span class="badge-magic">Орки</span> — Деца на първичната сила. Орките не са просто воини — те са шамани на предците, които призовават духовете на земята и кръвта. Техните тотеми пазят груба, но ефективна магия.</p>
     </div>
 
-    <!-- Магия (Atelier of Witch Hat) - мастило и печати -->
+    <!-- Магия Atelier of Witch Hat -->
     <div id="magic_witch" class="info-section hidden">
         <h2>✍️ Магия на мастилото и печатите</h2>
         <h3>«Atelier of Witch Hat» — Училище на магическите рисунки</h3>
         <p>Всяко заклинание изисква уникална магическа формула, която вещиците изписват със специално мастило върху всякаква повърхност. Печатите фиксират ефекта, превръщайки рисунката в жива магия. Сложните шарки могат да отварят портали, да променят материята или дори да спрат времето.</p>
-        <p><strong>Основни принципи:</strong> прецизност на линиите, намерение и концентрация. Мастилото трябва да бъде събрано от редки растения или метеоритен прах. Печатът е ключът, който активира скритата сила.</p>
         <ul>
             <li>🖋️ Мастилена четка — проводник на волята на мага.</li>
             <li>📜 Свитък-печат — задържа магията до момента на активация.</li>
@@ -229,138 +261,146 @@
         </ul>
     </div>
 
-    <!-- Магия (Frieren): аналитична магия и дешифриране -->
+    <!-- Магия Frieren -->
     <div id="magic_frieren" class="info-section hidden">
         <h2>🔮 Аналитична магия и дешифриране</h2>
         <h3>«Frieren: Beyond Journey's End» — магия на разбирането</h3>
-        <p>Магията на Фрирен се основава на анализ на структурата на заклинанията и търсене на „слаби места“. Това е интелигентно магьосничество, при което вместо мощна сила се използва познание за потоците на мана. Дешифрирането на древни магически езици позволява свободно манипулиране на вражеска магия или създаване на контрамагии.</p>
-        <p>Ключови аспекти: търпение, логика и способност да се виждат магическите контури, скрити от обикновеното око. Фрирен често използва заклинания, които не разрушават, а пренасочват енергията.</p>
+        <p>Магията на Фрирен се основава на анализ на структурата на заклинанията и търсене на „слаби места“. Дешифрирането на древни магически езици позволява свободно манипулиране на вражеска магия.</p>
         <ul>
             <li>📖 Разшифроване на гримоари — висш пилотаж.</li>
             <li>⚖️ Магия на баланса — превръщане на атаките в защитни чарове.</li>
-            <li>⏳ Спиране на времето в малки куполи — за анализ на сложни конструкции.</li>
+            <li>⏳ Спиране на времето за анализ.</li>
         </ul>
     </div>
 
-    <!-- Магия (Dungeon Meshi): магия чрез екология и храна -->
+    <!-- Магия Dungeon Meshi -->
     <div id="magic_dungeon" class="info-section hidden">
         <h2>🍲 Екологична магия и гастро-чарове</h2>
         <h3>«Dungeon Meshi» — изкуството да превръщаш чудовища в храна</h3>
-        <p>В подземията магията се черпи от самата екосистема: растения, гъби, слузести създания — всичко това са източници на жива енергия. Маговете в Dungeon Meshi използват алхимия и готварски чарове, за да превърнат отровните чудовища в питателна храна, възстановяваща силите на съюзниците.</p>
-        <p><strong>Магически техники:</strong> заклинания за разпознаване на годни за ядене части, чарове за неутрализиране на токсини, както и специални ритуали, които усилват вкуса и лечебните свойства на ястията. Пълна хармония с природата на лабиринта. Никое същество или растение не отива напразно.</p>
+        <p>В подземията магията се черпи от самата екосистема. Маговете използват алхимия и готварски чарове, за да превърнат отровните чудовища в питателна храна.</p>
         <ul>
             <li>🍄 Гъбна идентификация — различаване на жив гъб от мимик.</li>
-            <li>🥘 Котел на трансмутацията — превръща плътта на чудовище в питателен бульон.</li>
-            <li>🌿 Симбиоза с флората на подземието — временно опитомяване на хищни растения.</li>
+            <li>🥘 Котел на трансмутацията — превръща плътта в бульон.</li>
+            <li>🌿 Симбиоза с флората на подземието.</li>
         </ul>
     </div>
 
-    <!-- Монстри (Дракони, Мимици, Живи гъби) -->
+    <!-- Монстри -->
     <div id="monsters" class="info-section hidden">
         <h2>🐉 Бестиарий на опасните същества</h2>
-        <p><span class="badge-magic">Дракони</span> — Легендарни същества с люспи, които отразяват магията. Драконите могат да изгарят градове, но древните представители на този род също притежават интелект и хипнотичен поглед. Кръвта им е катализатор за свръхмощни отвари.</p>
-        <p><span class="badge-magic">Мимици</span> — Скришни същества, които се маскират като сандъци, врати или дори библиотечни шкафове. Когато жертвата се приближи, мимикът изстрелва дълъг език и притегля плячката в бездната на своето „храносмилателно измерение“. Любимият им начин за защита е да имитират магически артефакт.</p>
-        <p><span class="badge-magic">Живи гъби</span> — Спорови организми, които създават илюзии и отделят халюциногенни токсини. Те могат да се движат на групи, имитирайки пънове или стени. Някои видове живи гъби симбиозират с некроманти, хранейки се с остатъчна магия.</p>
+        <p><span class="badge-magic">Дракони</span> — Легендарни същества с люспи, които отразяват магията. Кръвта им е катализатор за свръхмощни отвари.</p>
+        <p><span class="badge-magic">Мимици</span> — Скришни същества, които се маскират като сандъци, врати или библиотечни шкафове.</p>
+        <p><span class="badge-magic">Живи гъби</span> — Спорови организми, които създават илюзии и отделят халюциногенни токсини.</p>
         <hr>
-        <p>⚠️ Съвети за ловците: Срещу дракони — магнезиеви капани и ледени чарове; Мимиците могат да бъдат разкрити чрез заклинанието „Истинска идентификация на предмета“; Живите гъби не понасят ярка слънчева светлина и солни кръгове.</p>
+        <p>⚠️ Съвети за ловците: Срещу дракони — ледени чарове; Мимиците се разкриват със заклинание за истинска идентификация.</p>
     </div>
 
     <div class="footer-note">
-        📜 Гримоарът се отваря по желание — докосни бутона и опознай скритото. „Златото на знанието не ръждясва“.
+        📜 Гримоарът се отваря по желание — докосни бутона и опознай скритото.
     </div>
 </div>
 
+<!-- Музикален контролен панел (YouTube амбиънт) -->
+<div class="music-control">
+    <span class="volume-icon">🎵</span>
+    <button id="playPauseBtn">▶ ПУСК</button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.3">
+    <span>🔊</span>
+</div>
+
+<!-- YouTube iframe плеър (скрит, но управляем) -->
+<div id="youtubePlayer" style="position: fixed; bottom: -100px; left: -100px; opacity: 0; pointer-events: none;">
+    <iframe id="musicIframe" width="1" height="1" src="https://www.youtube.com/embed/e5pGt1-Wy04?enablejsapi=1&autoplay=0&loop=1&playlist=e5pGt1-Wy04&controls=0&showinfo=0&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 <script>
-    /**
-     * Универсална функция toggleSection(id):
-     * Приема ID на елемент с клас .info-section
-     * Отваря блока с този ID (премахва hidden) и затваря ВСИЧКИ останали .info-section блокове.
-     */
+    // ---- Универсална функция toggleSection ----
     function toggleSection(id) {
-        // Намираме всички елементи с клас .info-section
         const allSections = document.querySelectorAll('.info-section');
-        // Намираме целевия елемент по id
         const targetSection = document.getElementById(id);
-        
-        // Ако целевият елемент не съществува – прекратяваме
-        if (!targetSection) {
-            console.warn(`Елемент с id "${id}" не е намерен сред .info-section`);
-            return;
-        }
-        
-        // Обхождаме всички блокове и затваряме всички ОСВЕН целевия
+        if (!targetSection) return;
         allSections.forEach(section => {
-            if (section !== targetSection) {
-                if (!section.classList.contains('hidden')) {
-                    section.classList.add('hidden');
-                }
-            }
+            if (section !== targetSection) section.classList.add('hidden');
         });
-        
-        // Отваряме целевия блок (премахваме hidden, ако е скрит)
-        if (targetSection.classList.contains('hidden')) {
-            targetSection.classList.remove('hidden');
+        targetSection.classList.remove('hidden');
+        // Плавно скролиране
+        if (targetSection.getBoundingClientRect().top < 0 || targetSection.getBoundingClientRect().top > window.innerHeight) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        
-        // Плавно скролиране до блока, ако е извън видимата зона
-        try {
-            const rect = targetSection.getBoundingClientRect();
-            if (rect.top < 0 || rect.top > window.innerHeight) {
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        } catch(e) {}
     }
-    
-    // Глобален обработчик на кликове (делегиране) за всички бутони с клас .arcane-btn
-    function handleArcaneClick(event) {
-        const btn = event.target.closest('.arcane-btn');
-        if (!btn) return;
-        const toggleId = btn.getAttribute('data-toggle');
-        if (!toggleId) return;
-        event.preventDefault();
-        toggleSection(toggleId);
-    }
-    
-    // Експортираме функцията в глобалния обхват за възможно използване от конзола или други скриптове
     window.toggleSection = toggleSection;
-    
-    // Премахваме стар обработчик, ако има, за да избегнем дублиране
-    document.removeEventListener('click', handleArcaneClick);
-    document.addEventListener('click', handleArcaneClick);
-    
-    // Функция за инициализация и гарантиране на началното състояние
-    function initializeSections() {
-        const allSections = document.querySelectorAll('.info-section');
-        // По подразбиране трябва да е видим само раздел "races", всички останали скрити
-        allSections.forEach(section => {
-            if (section.id === 'races') {
-                if (section.classList.contains('hidden')) {
-                    section.classList.remove('hidden');
-                }
-            } else {
-                if (!section.classList.contains('hidden')) {
-                    section.classList.add('hidden');
-                }
+
+    // Обработка на бутоните
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.arcane-btn');
+        if (btn && btn.dataset.toggle) {
+            e.preventDefault();
+            toggleSection(btn.dataset.toggle);
+        }
+    });
+
+    // Инициализация на видимите секции (само Раси да е видима)
+    document.querySelectorAll('.info-section').forEach(section => {
+        if (section.id !== 'races') section.classList.add('hidden');
+        else section.classList.remove('hidden');
+    });
+
+    // ---- Управление на YouTube музиката чрез YouTube IFrame API ----
+    let player;
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    let isPlaying = false;
+
+    // Функция, която се извиква, когато YouTube API е готов
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('musicIframe', {
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
             }
         });
     }
-    
-    // Ако DOM е все още зареждащ се – изчакваме, иначе изпълняваме веднага
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeSections);
-    } else {
-        initializeSections();
+
+    function onPlayerReady(event) {
+        player.setVolume(volumeSlider.value * 100);
+        // Не пускаме автоматично, защото браузърите блокират. Оставяме бутон.
+        playPauseBtn.textContent = '▶ ПУСК';
+        isPlaying = false;
     }
-    
-    // Допълнителна функционалност: ако в URL има хеш (напр. #magic_frieren) – отваряме съответния блок
-    if (window.location.hash) {
-        const hashId = window.location.hash.substring(1);
-        if (hashId && document.getElementById(hashId) && document.getElementById(hashId).classList.contains('info-section')) {
-            setTimeout(() => {
-                toggleSection(hashId);
-            }, 80);
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+            isPlaying = true;
+            playPauseBtn.textContent = '⏸ ПАУЗА';
+        } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+            isPlaying = false;
+            playPauseBtn.textContent = '▶ ПУСК';
         }
     }
+
+    playPauseBtn.addEventListener('click', () => {
+        if (!player) return;
+        if (isPlaying) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+        if (player) {
+            player.setVolume(e.target.value * 100);
+        }
+    });
+
+    // Зареждаме YouTube IFrame API скрипта
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Глобална функция за API
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 </script>
 </body>
 </html>
