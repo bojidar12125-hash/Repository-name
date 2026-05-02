@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Летописи на Елдория</title>
+    <title>Летописите на Елдория</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Cinzel:wght@400;700&display=swap');
 
@@ -21,126 +21,160 @@
 
         .container {
             max-width: 800px;
-            padding: 40px 20px;
+            padding: 30px 15px;
             text-align: center;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #ffd700;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            margin-bottom: 25px;
         }
 
-        .scroll-box {
+        .main-scroll {
             border: 2px solid #4a3721;
-            padding: 25px;
-            background: rgba(20, 10, 5, 0.8);
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            border-radius: 8px;
+            padding: 20px;
+            background: rgba(20, 10, 5, 0.85);
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+            border-radius: 12px;
             margin-bottom: 20px;
         }
 
+        /* Общие стили для кнопок */
+        .btn {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 15px 25px;
+            color: #1a0b2e;
+            background: linear-gradient(45deg, #ffd700, #b8860b);
+            border: none;
+            border-radius: 5px;
+            font-family: 'Cinzel';
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Стили для выпадающих блоков */
         .info-section {
             display: none; /* Скрыто по умолчанию */
             text-align: left;
-            margin-top: 30px;
-            background: rgba(40, 20, 10, 0.9);
+            background: rgba(30, 15, 40, 0.9);
             padding: 20px;
-            border-left: 3px solid #ffd700;
-            animation: fadeIn 1s ease;
+            border: 1px solid #ffd700;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            animation: fadeInWobble 0.6s ease-out; /* Крутая анимация */
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        h2 { 
+            color: #ffd700; 
+            border-bottom: 1px solid #ffd700; 
+            padding-bottom: 5px; 
+            font-family: 'Cinzel'; 
+            text-align: center;
+        }
+        
+        .entry {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 2px solid #ffd700;
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        h2 { color: #ffd700; font-family: 'Cinzel'; border-bottom: 1px solid #4a3721; }
+        .entry b { color: #ffd700; display: block; margin-bottom: 3px; }
 
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            color: #1a0b2e;
-            background: linear-gradient(45deg, #ffd700, #b8860b);
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            border: none;
-            font-family: 'Cinzel';
+        /* Крутая анимация появления с легким покачиванием */
+        @keyframes fadeInWobble {
+            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
+            50% { transform: translateY(-5px) scale(1.02); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .race-card { margin-bottom: 20px; }
-        .race-card b { color: #ffd700; }
+        .divider {
+            border: 0;
+            border-top: 1px dashed #4a3721;
+            margin: 30px 0;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Елдория: Летописи</h1>
+        <h1>📜 Летописи на Елдория</h1>
         
-        <div class="scroll-box">
-            <p>"Светът е голям и крие много тайни. Натисни бутона долу, за да призовеш знанието за древните раси."</p>
-            <button class="btn" onclick="showMagic()">Влез в архива</button>
-        </div>
-
-        <div id="magicInfo" class="info-section">
-            <h2>Древните раси</h2>
+        <div class="main-scroll">
+            <p>"Ти прекрачи прага на Великата библиотека. Избери коя тайна искаш да разкриеш днес..."</p>
             
-            <div class="race-card">
-                <b>🧝 Елфи:</b> Безсмъртни пазители на горите. Горди и изтънчени. 
-                <i>Отношения:</i> Гледат на хората с пренебрежение, а с дворфите имат вечен спор за красотата на природата срещу метала.
+            <button class="btn" onclick="toggleSection('racesInfo')">👥 Древните Раси</button>
+            <button class="btn" onclick="toggleSection('artifactsInfo')">🗝️ Магически Артефакти</button>
+        </div>
+
+        <div id="racesInfo" class="info-section">
+            <h2>Жителите на света</h2>
+            <div class="entry"><b>🧝 Елфи:</b> Пазители на горите, владеят магията чрез интуиция.</div>
+            <div class="entry"><b>🧔 Дворфи:</b> Крале на подземията, коват руни в стомана.</div>
+            <div class="entry"><b>⚔️ Хора:</b> Амбициозни строители на империи.</div>
+            <div class="entry"><b>👹 Орки:</b> Свободни племена, които признават само силата.</div>
+        </div>
+
+        <div id="artifactsInfo" class="info-section">
+            <h2>Древни Артефакти</h2>
+            
+            <div class="entry">
+                <b>🖋️ Магическа писалка (Atelier)</b>
+                Инструментът, с който магьосниците рисуват съдбата. Без това специално перо нито един магически кръг няма да оживее.
             </div>
 
-            <div class="race-card">
-                <b>🧔 Дворфи:</b> Майстори на ковачеството и добива на злато. Живеят в дълбоки пещери.
-                <i>Отношения:</i> Уважават хората за търговията, но не понасят орките и често се карат с елфите.
+            <div class="entry">
+                <b>📜 Свитък на "Золтрак" (Frieren)</b>
+                Копие на древно, разрушително заклинание. Преди е било символ на ужас, сега е задължително знание за всеки маг.
             </div>
 
-            <div class="race-card">
-                <b>👹 Орки:</b> Силни и свирепи воини. Живеят за битката.
-                <i>Отношения:</i> Намират се в състояние на постоянна война с всички останали раси, особено с хората и елфите.
-            </div>
-
-            <div class="race-card">
-                <b>⚔️ Хора:</b> Най-амбициозната раса. Строят империи и градове.
-                <i>Отношения:</i> Опитват се да балансират между дипломацията с елфите и търговията с дворфите, докато отблъскват набезите на орките.
+            <div class="entry">
+                <b>🗡️ Кенсуке, Живият меч (Dungeon Meshi)</b>
+                Меч, който е част от екосистемата на подземието. Той усеща опасностите, но изисква грижи като домашен любимец.
             </div>
         </div>
+
+        <div class="divider"></div>
+        <p style="font-size: 0.8rem; opacity: 0.5; font-style: italic;">Архивите се обновяват...</p>
+
     </div>
 
     <script>
-        function showMagic() {
-            var info = document.getElementById("magicInfo");
-            if (info.style.display === "none" || info.style.display === "") {
-                info.style.display = "block";
-            } else {
-                info.style.display = "none";
-            }
+        function toggleSection(sectionId) {
+            // Список всех секций
+            var sections = ['racesInfo', 'artifactsInfo'];
+            
+            sections.forEach(function(id) {
+                var section = document.getElementById(id);
+                if (id === sectionId) {
+                    // Если это нажатая секция — переключаем (показать/скрыть)
+                    if (section.style.display === "block") {
+                        section.style.display = "none";
+                    } else {
+                        section.style.display = "block";
+                    }
+                } else {
+                    // Все остальные секции обязательно скрываем
+                    section.style.display = "none";
+                }
+            });
         }
     </script>
 
 </body>
 </html>
-<hr style="border: 0; border-top: 1px dashed #4a3721; margin: 40px 0;">
-
-<div class="scroll-box" style="text-align: left;">
-    <h2 style="color: #ffd700; font-family: 'Cinzel'; text-align: center;">Видове Магически Системи</h2>
-    
-    <div style="margin-bottom: 20px; border-left: 3px solid #ffd700; padding-left: 15px;">
-        <b style="color: #ffd700; font-size: 1.2rem;">🎨 Магията на Начертанието (Atelier)</b>
-        <p>Тук магията е изкуство. Тя не се изрича, а се рисува с магическо мастило. Всеки кръг е затвор за енергията, а символите вътре са инструкциите. Ако линията е неточна, магията се разваля.</p>
-    </div>
-
-    <div style="margin-bottom: 20px; border-left: 3px solid #4facfe; padding-left: 15px;">
-        <b style="color: #4facfe; font-size: 1.2rem;">🔮 Аналитична Магия (Frieren)</b>
-        <p>Магията е наука и въображение. За да победиш заклинание, трябва да го анализираш и дешифрираш. "Обикновената" магия в ръцете на майстор е по-силна от древно проклятие, което не разбираш.</p>
-    </div>
-
-    <div style="margin-bottom: 20px; border-left: 3px solid #2ecc71; padding-left: 15px;">
-        <b style="color: #2ecc71; font-size: 1.2rem;">🍲 Екологична Магия (Dungeon Meshi)</b>
-        <p>Магията е част от природата и цикъла на живота. Тя изисква огромно количество енергия (калории). Всяко магическо създание е източник на ресурси, а разбирането на екосистемата е ключът към оцеляването в подземията.</p>
-    </div>
-</div>
 
